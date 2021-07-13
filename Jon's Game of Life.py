@@ -20,7 +20,6 @@ screen = pygame.display.set_mode(size)
 
 gameState = np.random.randint(0, 2, (nxC, nyC))
 
-
 while 1:
 
     screen.fill(bg)
@@ -39,14 +38,11 @@ while 1:
                       gameState[(x)     % nxC, (y + 1) % nyC] + \
                       gameState[(x + 1) % nxC, (y + 1) % nyC]
 
-
-            #Una célula muerta con exactamente 3 celulas vecinas vivas "nace"
+            # A dead cell is "born" with exactly 3 living neighboring cells            
             if gameState[x, y] == 0 and n_neigh == 3:
                 new_gameState[x, y] = 1
             elif gameState[x, y] == 1 and (n_neigh < 2 or n_neigh > 3):
                 new_gameState[x, y] = 0
-
-           
 
             poly = [((x - 1)* dimCW,  (y - 1) * dimCH),
                     ((x) * dimCW,     (y - 1) * dimCH),
@@ -54,7 +50,6 @@ while 1:
                     ((x - 1) * dimCW, (y) * dimCH)]
 
             pygame.draw.polygon(screen, (128, 28, 128), poly, int(abs(1- new_gameState[x, y]))) 
-    
 
     gameState = new_gameState
     time.sleep(0.002)
