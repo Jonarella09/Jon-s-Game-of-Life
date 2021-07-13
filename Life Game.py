@@ -2,6 +2,7 @@ import sys, pygame
 from tkinter.constants import Y
 import numpy as np
 import matplotlib.pyplot as plt
+import time
 
 pygame.init()
 
@@ -15,48 +16,46 @@ dimCH = (height - 1) / nyC
 
 bg = 25, 25, 25
 
-# screen = pygame.display.set_mode(size)
-
-# screen.fill(bg)
+screen = pygame.display.set_mode(size)
 
 gameState = np.random.randint(0, 2, (nxC, nyC))
 
-print(gameState)
-
 
 while 1:
-    
-    for y in range(1, nyC + 1):
-        for x in range(1, nxC + 1):
+
+    screen.fill(bg)
+
+    new_gameState = np.copy(gameState)
+
+    for y in range(0, nyC):
+        for x in range(0, nxC):
             
             n_neigh = gameState[(x - 1) % nxC, (y - 1) % nyC] + \
-                      gameState[(x) % nxC, (y - 1) % nyC] + \
+                      gameState[(x)     % nxC, (y - 1) % nyC] + \
                       gameState[(x + 1) % nxC, (y - 1) % nyC] + \
-                      gameState[(x - 1) % nxC, (y) % nyC] + \
-                      gameState[(x + 1) % nxC, (y) % nyC] + \
+                      gameState[(x - 1) % nxC, (y)     % nyC] + \
+                      gameState[(x + 1) % nxC, (y)     % nyC] + \
                       gameState[(x - 1) % nxC, (y + 1) % nyC] + \
-                      gameState[(x) % nxC, (y + 1) % nyC] + \
+                      gameState[(x)     % nxC, (y + 1) % nyC] + \
                       gameState[(x + 1) % nxC, (y + 1) % nyC]
-
-            print(n_neigh)
 
 
             #Una célula muerta con exactamente 3 celulas vecinas vivas "nace"
-            np.sum(gameState[x-1 : x + 1, y-1 : y + 2]) - gameState[x, y]
+            if gameState[x, y] == 0 and n_neigh == 3:
+                new_gameState[x, y] = 1
+            elif gameState[x, y] == 1 and (n_neigh < 2 or n_neigh > 3):
+                new_gameState[x, y] = 0
 
+           
 
+            poly = [((x - 1)* dimCW,  (y - 1) * dimCH),
+                    ((x) * dimCW,     (y - 1) * dimCH),
+                    ((x) * dimCW,     (y) * dimCH),
+                    ((x - 1) * dimCW, (y) * dimCH)]
 
-            #Una célula viva con 2 0 3 células vecinas vivas sigue viva, en otro caso muere
-
-            poly = [((y - 1)* dimCW,  (x - 1) * dimCH),
-                    ((y) * dimCW,     (x - 1) * dimCH),
-                    ((y)* dimCW,      (x) * dimCH),
-                    ((y - 1)* dimCW,  (x) * dimCH)]
-            
-            
-            plt.matshow(gameState)
-            plt.show()
-
-            #pygame.draw.polygon(screen, (128, 128, 128), poly, 1)
+            pygame.draw.polygon(screen, (128, 28, 128), poly, int(abs(1- new_gameState[x, y]))) 
     
-    #pygame.display.flip()
+
+    gameState = new_gameState
+    time.sleep(0.002)
+    pygame.display.flip()
