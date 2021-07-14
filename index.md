@@ -23,9 +23,9 @@ Syntax highlighted code block
 
 **Bold** and _Italic_ and `Code` text
 
-[https://github.com/Jonarella09/Jon-s-Game-of-Life/archive/refs/tags/v0.1.zip](url) and ![Image](src)
+[](url) and ![Image](src)
 ```
-
+[Jon's Game of Life source code .zip](https://github.com/Jonarella09/Jon-s-Game-of-Life/archive/refs/tags/v0.1.zip)
 For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
 
 ### Jekyll Themes
