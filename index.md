@@ -1,4 +1,4 @@
-## Welcome to GitHub Pages
+## Download Jon's Game of Life!
 
 You can use the [editor on GitHub](https://github.com/Jonarella09/Jon-s-Game-of-Life/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
 
@@ -23,7 +23,7 @@ Syntax highlighted code block
 
 **Bold** and _Italic_ and `Code` text
 
-[Link](url) and ![Image](src)
+[https://github.com/Jonarella09/Jon-s-Game-of-Life/archive/refs/tags/v0.1.zip](url) and ![Image](src)
 ```
 
 For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
